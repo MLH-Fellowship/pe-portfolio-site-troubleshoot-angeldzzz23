@@ -21,7 +21,7 @@ class TestTimelinePost(unittest.TestCase):
         # Not strictly necessary since SQLite in-memory databases only live
         # for the duration of the connection, and in the next step we close
         # the connection...but a good practice all the same.
-        test_db.drop_tables(MODELS)
+        #test_db.drop_tables(MODELS)
 
         # Close connection to db.
         test_db.close()
