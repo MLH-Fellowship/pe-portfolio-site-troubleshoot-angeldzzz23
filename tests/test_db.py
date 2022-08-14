@@ -21,7 +21,7 @@ class TestTimelinePost(unittest.TestCase):
         # Not strictly necessary since SQLite in-memory databases only live
         # for the duration of the connection, and in the next step we close
         # the connection...but a good practice all the same.
-        test_db.drop_tables(MODELS)
+        #test_db.drop_tables(MODELS)
 
         # Close connection to db.
         test_db.close()
@@ -29,13 +29,14 @@ class TestTimelinePost(unittest.TestCase):
     def test_timeline_post(self):
         # Create 2 timeline posts.
         first_post = TimelinePost.create(name='John Doe', email='john@example.com', content='Hello world, I\'m John!')
+
         assert first_post.id == 1
         second_post = TimelinePost.create(name='Jane Doe', email='jame@example.com', content='Hello world, I\'m Jane!')
         assert second_post.id == 2
         # Get timeline posts and assert that they are correct
         timeline_posts = TimelinePost.select().order_by(TimelinePost.created_at.desc())
         assert timeline_posts.count() == 2
-        assert timeline_posts[0].id == 1
-        assert timeline_posts[0].name == 'John Doe'
-        assert timeline_posts[1].id == 2
-        assert timeline_posts[1].email == 'jame@example.com'
+        assert timeline_posts[1].id == 1
+        assert timeline_posts[1].name == 'John Doe'
+        assert timeline_posts[0].id == 2
+        assert timeline_posts[0].email == 'jame@example.com'
